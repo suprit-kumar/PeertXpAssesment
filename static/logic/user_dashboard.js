@@ -1,11 +1,11 @@
 $(document).ready(function () {
 
     //On Load Fetch
-    fetchTicketFormSelectFieldDetatails()
+    fetchTicketFormSelectFieldDetails()
 
 });
 
-function fetchTicketFormSelectFieldDetatails() {
+function fetchTicketFormSelectFieldDetails() {
     let departmentList, categoryList, prirorityList;
     $.ajax({
         type: 'POST',
