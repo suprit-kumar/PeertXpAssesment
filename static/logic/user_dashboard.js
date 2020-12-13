@@ -37,7 +37,7 @@ function fetchTicketFormSelectFieldDetails() {
                 swal(response.msg)
             }
         }, error: function (error) {
-            console.log("Error in fetchClientsToCreateUser function --->", error);
+            console.log("Error in fetchTicketFormSelectFieldDetails function --->", error);
         }
     });
 }
