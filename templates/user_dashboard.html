@@ -15,12 +15,11 @@
     <link rel="stylesheet" href="{% static 'mdbootstrap/css/style.css' %}">
     <!-- MDBootstrap Datatables  -->
     <link rel="stylesheet" href="{% static 'mdbootstrap/css/addons/datatables.min.css' %}">
-    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
 
     <title> Dashboard </title>
 
 </head>
-<body>
+<body style="background: #f8f8ff">
 
 <!-- Navbar -->
 <nav class="mb-1 navbar navbar-expand-sm #2962ff blue accent-4">
@@ -46,70 +45,119 @@
 </nav>
 
 <div class="container-fluid">
-
     <div class="row mt-2">
         <div class="col-md-6">
-            <!-- Default form contact -->
             <form class="text-center border border-light p-5" action="javascript:void(0)">
                 {% csrf_token %}
                 <p class="h4 mb-4">Submit a ticket</p>
                 <p>Ticket Information</p>
-                <div class="form-group">
-                    <label>Department</label>
-                    <span class="mandatory" style="color: red">*</span>
-                    <select class="browser-default form-control custom-select mb-4" id="ticket_department">
-                    </select>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Department</label>
+                            <span class="mandatory" style="color: red">*</span>
+                            <select class="browser-default form-control custom-select mb-4" id="ticket_department">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Category</label>
+                            <span class="mandatory" style="color: red">*</span>
+                            <select class="browser-default form-control custom-select mb-4" id="ticket_category">
+                            </select>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label>Category</label>
-                    <span class="mandatory" style="color: red">*</span>
-                    <select class="browser-default form-control custom-select mb-4" id="ticket_category">
-                    </select>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>PWSLab Project URL</label>
+                            <span class="mandatory" style="color: red">*</span>
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Subject</label>
+                            <span class="mandatory" style="color: red">*</span>
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label>PWSLab Project URL</label>
-                    <span class="mandatory" style="color: red">*</span>
-                    <input type="text" class="form-control">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label>Description</label>
+                            <span class="mandatory" style="color: red">*</span>
+                            <textarea class="form-control rounded-0" id="exampleFormControlTextarea2" rows="3"
+                                      placeholder="Message"></textarea>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label>Subject</label>
-                    <span class="mandatory" style="color: red">*</span>
-                    <input type="text" class="form-control">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Contact Name</label>
+                            <span class="mandatory" style="color: red">*</span>
+                            <input type="text" class="form-control" value="{{ details.0.username }}" disabled>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Email</label>
+                            <span class="mandatory" style="color: red">*</span>
+                            <input type="email" class="form-control" value="{{ details.0.useremail }}" disabled>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label>Description</label>
-                    <span class="mandatory" style="color: red">*</span>
-                    <textarea class="form-control rounded-0" id="exampleFormControlTextarea2" rows="3"
-                              placeholder="Message"></textarea>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label>Priority</label>
+                            <span class="mandatory" style="color: red">*</span>
+                            <select class="browser-default form-control custom-select mb-4" id="ticket_priority">
+                            </select>
+                        </div>
+                    </div>
                 </div>
-                <h4>Contact Details</h4>
-                <div class="form-group">
-                    <label>Contact Name</label>
-                    <span class="mandatory" style="color: red">*</span>
-                    <input type="text" class="form-control" value="{{ details.0.username }}" disabled>
-                </div>
-                <div class="form-group">
-                    <label>Email</label>
-                    <span class="mandatory" style="color: red">*</span>
-                    <input type="email" class="form-control" value="{{ details.0.useremail }}" disabled>
-                </div>
-                <h4>Additional Information</h4>
-                <div class="form-group">
-                    <label>Priority</label>
-                    <span class="mandatory" style="color: red">*</span>
-                    <select class="browser-default form-control custom-select mb-4" id="ticket_priority">
-                    </select>
-                </div>
-
                 <button class="btn btn-info btn-block" id="submit_ticket_details">Submit</button>
             </form>
         </div>
         <div class="col-md-6">
+            <h5 class="btn btn-info">Ticket Status</h5>
+            <ul class="nav nav-tabs md-tabs mt-2" id="myTabMD" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="home-tab-md" data-toggle="tab" href="#home-md" role="tab"
+                       aria-controls="home-md"
+                       aria-selected="true">Open</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="profile-tab-md" data-toggle="tab" href="#profile-md" role="tab"
+                       aria-controls="profile-md"
+                       aria-selected="false">Closed</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="contact-tab-md" data-toggle="tab" href="#contact-md" role="tab"
+                       aria-controls="contact-md"
+                       aria-selected="false">On Hold</a>
+                </li>
+            </ul>
+            <div class="tab-content card pt-5" id="myTabContentMD">
+                <div class="tab-pane fade show active" id="home-md" role="tabpanel" aria-labelledby="home-tab-md">
 
+                </div>
+                <div class="tab-pane fade" id="profile-md" role="tabpanel" aria-labelledby="profile-tab-md">
+
+                </div>
+                <div class="tab-pane fade" id="contact-md" role="tabpanel" aria-labelledby="contact-tab-md">
+
+                </div>
+            </div>
         </div>
     </div>
-
 </div>
+
 
 <script type="text/javascript" src="{% static 'mdbootstrap/js/jquery.min.js' %}"></script>
 <!-- Bootstrap tooltips -->

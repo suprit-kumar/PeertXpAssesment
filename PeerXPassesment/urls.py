@@ -20,6 +20,7 @@ from ticket_app import views
 urlpatterns = [
     # path('admin/', admin.site.urls),
     path('', views.index, name='index'),
+    path('signup/', views.signup, name='signup'),
     path('login_operation/', views.login_operation, name='login_operation'),
     path('logout/', views.logout, name='logout'),
     path('register_new_user/', views.register_new_user, name='register_new_user'),

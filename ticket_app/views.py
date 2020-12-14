@@ -3,7 +3,6 @@ import re
 from django.http import JsonResponse, HttpResponseRedirect
 from django.shortcuts import render
 
-# Create your views here.
 from django.views.decorators.csrf import csrf_exempt
 from ticket_app import models
 from ticket_app.utils import *
@@ -12,6 +11,11 @@ from ticket_app.utils import *
 def index(request):
     context = {}
     return render(request, 'login.html', context)
+
+
+def signup(request):
+    context = {}
+    return render(request, 'signup.html', context)
 
 
 @csrf_exempt
@@ -96,8 +100,7 @@ def fetch_ticketform_select_field_details(request):
         if 'usercode' in request.session:
             if request.method == 'POST':
                 ticketform_details = list(
-                    models.TicketDetails.objects.values('departments', 'categories',
-                                                                                      'priorities'))
+                    models.TicketDetails.objects.values('departments', 'categories', 'priorities'))
                 return JsonResponse({'result': 'success', 'ticketform_details': ticketform_details})
     except Exception as e:
         print("Exception in fetch_ticketform_select_field_details views.py-->", e)

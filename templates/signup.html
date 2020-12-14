@@ -23,28 +23,35 @@
 </head>
 <body>
 
+
 <div class="login-form">
     <div class="form-header">
-        <div class="title">Login</div>
+        <div class="title">Register</div>
     </div>
     <div class="form-container">
         {% csrf_token %}
         <div class="form-element">
-            <label class="fa fa-user" for="email_input"></label>
-            <input type="email" id="email_input"
-                   placeholder="Username">
+            <label class="fa fa-user" for="reg_name_input"></label>
+            <input type="text" id="reg_name_input"
+                   placeholder="Name *">
         </div>
         <div class="form-element">
-            <label class="fa fa-key" for="pwd_input"></label>
-            <input type="password" id="pwd_input"
-                   placeholder="Password">
+            <label class="fa fa-user" for="reg_email_input"></label>
+            <input type="email" id="reg_email_input"
+                   placeholder="Username *">
         </div>
         <div class="form-element">
-            <button id="signInBtn">Login</button>
+            <label class="fa fa-key" for="reg_pass_input"></label>
+            <input type="password" id="reg_pass_input"
+                   placeholder="Password *">
         </div>
-        <p style="color:white;">New User ?<a href="{% url 'signup' %}">Register</a></p>
+        <div class="form-element">
+            <button id="signUpBtn">Register</button>
+        </div>
+        <p style="color:white;"><a href="{% url 'index' %}">Login</a></p>
     </div>
 </div>
+
 
 <script type="text/javascript" src="{% static 'mdbootstrap/js/jquery.min.js' %}"></script>
 <!-- Bootstrap tooltips -->
@@ -57,7 +64,6 @@
 <script type="text/javascript" src="{% static 'mdbootstrap/js/mdb.min.js' %}"></script>
 <!-- Your custom scripts (optional) -->
 <script type="text/javascript" src="{% static 'sweetalert/sweetalert.min.js' %}"></script>
-{#<script type="text/javascript" src="{% static 'sweetalert/sweetalert.min.js' %}"></script>#}
 
 <script type="text/javascript" src="{% static 'logic/login.js' %}"></script>
 

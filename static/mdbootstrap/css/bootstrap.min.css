@@ -2273,7 +2273,7 @@ textarea.form-control {
 }
 
 .form-group {
-    margin-bottom: 1rem
+    margin-bottom: 0rem;
 }
 
 .form-text {

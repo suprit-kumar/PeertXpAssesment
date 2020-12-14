@@ -1,0 +1,7 @@
+.idea
+*.log
+*.pyc
+workspace.xml
+ticket_app/__pycache__/*
+PeerXPassesment/__pycache__/*
+__pycache__/*
