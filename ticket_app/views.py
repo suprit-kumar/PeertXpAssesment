@@ -23,8 +23,9 @@ def login_operation(request):
     try:
         useremail = request.POST.get('useremail')
         password = request.POST.get('password')
-        u_name = re.search(r'\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b', useremail, re.I)
-        if u_name:
+        if u_name := re.search(
+            r'\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b', useremail, re.I
+        ):
             try:
                 validate_user = models.User.objects.get(useremail=useremail,
                                                         password=encrypt_password(password),
@@ -97,11 +98,10 @@ def register_new_user(request):
 @csrf_exempt
 def fetch_ticketform_select_field_details(request):
     try:
-        if 'usercode' in request.session:
-            if request.method == 'POST':
-                ticketform_details = list(
-                    models.TicketDetails.objects.values('departments', 'categories', 'priorities'))
-                return JsonResponse({'result': 'success', 'ticketform_details': ticketform_details})
+        if 'usercode' in request.session and request.method == 'POST':
+            ticketform_details = list(
+                models.TicketDetails.objects.values('departments', 'categories', 'priorities'))
+            return JsonResponse({'result': 'success', 'ticketform_details': ticketform_details})
     except Exception as e:
         print("Exception in fetch_ticketform_select_field_details views.py-->", e)
         return JsonResponse(

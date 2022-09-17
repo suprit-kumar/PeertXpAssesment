@@ -25,7 +25,7 @@ class TicketDetails(models.Model):
         db_table = "ticket_details"
 
     def __unicode__(self):
-        return u'%s' % [self.id]
+        return f'{[self.id]}'
 
 class User(models.Model):
     u_id = models.AutoField(primary_key=True)
@@ -40,4 +40,4 @@ class User(models.Model):
         db_table = "user"
 
     def __unicode__(self):
-        return u'%s' % [self.u_id]
+        return f'{[self.u_id]}'
